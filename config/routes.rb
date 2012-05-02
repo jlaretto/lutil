@@ -1,4 +1,19 @@
 LegalUtility::Application.routes.draw do
+  resources :people
+
+  resources :companies
+
+
+  get "static_pages/wizard"
+
+  get "static_pages/about"
+
+  get "static_pages/help"
+
+  get "static_pages/initial_capitalization"
+
+  root to: 'static_pages#home'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

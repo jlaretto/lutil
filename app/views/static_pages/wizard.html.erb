@@ -1,0 +1,26 @@
+<h1>StaticPages#initial_capitalization</h1>
+<p>Find me in app/views/static_pages/initial_capitalization.html.erb</p>
+<%= form_tag "wizard", method: :get do %>
+    <% case @step
+        when "Step 1"
+    %>
+        <%= render "companies/form" %>
+    <%  when "Step 2" %>
+        Step 2
+
+    <%  when "Step 3" %>
+        Step 3
+
+    <%  when "Step 4" %>
+        Step 4
+    <%  when "Step 6" %>
+        End
+    <% end %>
+    <%= hidden_field_tag "step", @step %>
+    <table>
+        <tr>
+            <td><%= submit_tag "Previous", class: "btn btn-small btn-primary" %></td>
+            <td><%= submit_tag "Next", class: "btn btn-small btn-primary" %></td>
+        </tr>
+    </table>
+<%end%>
