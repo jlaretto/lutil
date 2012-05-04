@@ -1,8 +1,15 @@
 LegalUtility::Application.routes.draw do
-  resources :people
+  get "session/create"
+
+  get "session/destroy"
+
+   resources :people
 
   resources :companies
 
+  match '/signup', to: 'users#new'
+  match '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
 
   get "static_pages/wizard"
 
