@@ -3,9 +3,15 @@ LegalUtility::Application.routes.draw do
 
   get "session/destroy"
 
-   resources :people
+  resources :people
+
+  resources :users
+
+  resources :afterSignupWizard
 
   resources :companies
+
+  resources :sessions, only: [:new, :create, :destroy]
 
   match '/signup', to: 'users#new'
   match '/signin', to: 'sessions#new'

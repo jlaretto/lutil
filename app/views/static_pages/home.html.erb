@@ -1,8 +1,14 @@
 <div class="center hero-unit">
-  <h1>
-    The Legal Utility
+  <% if userSignedIn? %>
+      <h1>
+        User signed in
+      </h1>
+<% else %>
+      <h1>
+    LUtility
   </h1>
 
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %><br><br>
+  <%= link_to "Sign up", signup_path, class: "btn btn-large btn-primary" %><br><br>
    <%= link_to "Already a User? Sign in now", signin_path, class: "btn btn-large btn-primary" %>
-</div>
+   <% end %>
+          </div>

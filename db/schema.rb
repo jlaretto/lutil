@@ -50,10 +50,10 @@ ActiveRecord::Schema.define(:version => 20120504022529) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email"
+    t.string   "email",                              :null => false
     t.string   "name"
     t.integer  "person_id"
-    t.string   "session_token"
+    t.string   "session_token",                      :null => false
     t.string   "password_digest"
     t.boolean  "email_validated", :default => false
     t.boolean  "admin_approved",  :default => true
