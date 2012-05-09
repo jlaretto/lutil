@@ -4,7 +4,7 @@ namespace :db do
     create_users
     create_comps
     create_persons
-    create_relations
+    #create_relations
   end
 end
 

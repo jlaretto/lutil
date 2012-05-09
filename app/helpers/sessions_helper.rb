@@ -2,7 +2,7 @@ module SessionsHelper
 
   def signUserIn (user)
       user.save
-      cookies["session_token"] = {value: user.session_token, expires: Time.now + 120 }
+      cookies["session_token"] = {value: user.session_token, expires: Time.now + 3600 }
   end
 
   def current_user
