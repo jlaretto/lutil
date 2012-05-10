@@ -5,7 +5,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/production.rb" afterPath="$PROJECT_DIR$/config/environments/production.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/after_signup_wizard_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/after_signup_wizard_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/after_signup_wizard/company_details.html.erb" afterPath="$PROJECT_DIR$/app/views/after_signup_wizard/company_details.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/companies/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/companies/_form.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
     </list>
     <ignored path="LegalUtility.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,16 +33,16 @@
       <file leaf-file-name="_form.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/companies/_form.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="39" selection-start="39" selection-end="39" vertical-scroll-proportion="-0.0">
+            <state line="63" column="8" selection-start="1746" selection-end="1772" vertical-scroll-proportion="-27.791666">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="after_signup_wizard_controller.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="after_signup_wizard_controller.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/after_signup_wizard_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="21" selection-start="578" selection-end="578" vertical-scroll-proportion="0.0">
+            <state line="26" column="30" selection-start="469" selection-end="469" vertical-scroll-proportion="0.49118388">
               <folding />
             </state>
           </provider>
@@ -48,16 +51,16 @@
       <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/routes.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="42" selection-start="186" selection-end="186" vertical-scroll-proportion="0.0">
+            <state line="17" column="11" selection-start="329" selection-end="329" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Gemfile" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Gemfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="9" selection-start="663" selection-end="663" vertical-scroll-proportion="0.58564234">
+            <state line="24" column="11" selection-start="566" selection-end="566" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -67,15 +70,6 @@
         <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="17" column="30" selection-start="645" selection-end="645" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="founder_details.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/after_signup_wizard/founder_details.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="21" selection-start="89" selection-end="89" vertical-scroll-proportion="-1.25">
               <folding />
             </state>
           </provider>
@@ -102,7 +96,7 @@
       <file leaf-file-name="after_signup_wizard_helper.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/helpers/after_signup_wizard_helper.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="2" column="13" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -111,8 +105,31 @@
       <file leaf-file-name="company_details.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/after_signup_wizard/company_details.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="36" selection-start="103" selection-end="103" vertical-scroll-proportion="-1.25">
+            <state line="2" column="22" selection-start="67" selection-end="131" vertical-scroll-proportion="-1.25">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_form.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/people/_form.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="7.2916665">
+              <folding>
+                <marker date="1335669483000" expanded="true" signature="94:332" placeholder="..." />
+                <marker date="1335669483000" expanded="true" signature="210:321" placeholder="..." />
+                <marker date="1335669483000" expanded="true" signature="367:447" placeholder="..." />
+                <marker date="1335669483000" expanded="true" signature="469:551" placeholder="..." />
+                <marker date="1335669483000" expanded="true" signature="573:651" placeholder="..." />
+                <marker date="1335669483000" expanded="true" signature="673:755" placeholder="..." />
+                <marker date="1335669483000" expanded="true" signature="777:847" placeholder="..." />
+                <marker date="1335669483000" expanded="true" signature="869:957" placeholder="..." />
+                <marker date="1335669483000" expanded="true" signature="979:1069" placeholder="..." />
+                <marker date="1335669483000" expanded="true" signature="1091:1167" placeholder="..." />
+                <marker date="1335669483000" expanded="true" signature="1189:1261" placeholder="..." />
+                <marker date="1335669483000" expanded="true" signature="1283:1355" placeholder="..." />
+                <marker date="1335669483000" expanded="true" signature="1379:1408" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -134,18 +151,18 @@
         <option value="$PROJECT_DIR$/app/controllers/users_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
         <option value="$PROJECT_DIR$/app/controllers/sessions_controller.rb" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/views/layouts/_address.html.erb" />
         <option value="$PROJECT_DIR$/app/models/company.rb" />
-        <option value="$PROJECT_DIR$/app/views/after_signup_wizard/company_details.html.erb" />
         <option value="$PROJECT_DIR$/lib/tasks/sample_data.rake" />
         <option value="$PROJECT_DIR$/app/helpers/sessions_helper.rb" />
         <option value="$PROJECT_DIR$/app/views/after_signup_wizard/founder_details.html.erb" />
         <option value="$PROJECT_DIR$/config/environments/development.rb" />
-        <option value="$PROJECT_DIR$/app/views/companies/_form.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/after_signup_wizard_controller.rb" />
         <option value="$PROJECT_DIR$/config/environments/production.rb" />
+        <option value="$PROJECT_DIR$/app/views/companies/_form.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/after_signup_wizard/company_details.html.erb" />
         <option value="$PROJECT_DIR$/Gemfile" />
+        <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/after_signup_wizard_controller.rb" />
       </list>
     </option>
   </component>
@@ -821,11 +838,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/models/user.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="93" selection-start="299" selection-end="299" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/tasks/sample_data.rake">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="5" selection-start="148" selection-end="148" vertical-scroll-proportion="0.0">
@@ -859,11 +871,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/helpers/after_signup_wizard_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/after_signup_wizard/founder_details.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="21" selection-start="89" selection-end="89" vertical-scroll-proportion="-1.25">
@@ -885,34 +892,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/after_signup_wizard/company_details.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="36" selection-start="103" selection-end="103" vertical-scroll-proportion="-1.25">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/companies/_form.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="39" selection-start="39" selection-end="39" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/after_signup_wizard_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="21" selection-start="578" selection-end="578" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="42" selection-start="186" selection-end="186" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="30" selection-start="645" selection-end="645" vertical-scroll-proportion="0.0">
@@ -920,9 +899,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/people/_form.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="7.2916665">
+          <folding>
+            <marker date="1335669483000" expanded="true" signature="94:332" placeholder="..." />
+            <marker date="1335669483000" expanded="true" signature="210:321" placeholder="..." />
+            <marker date="1335669483000" expanded="true" signature="367:447" placeholder="..." />
+            <marker date="1335669483000" expanded="true" signature="469:551" placeholder="..." />
+            <marker date="1335669483000" expanded="true" signature="573:651" placeholder="..." />
+            <marker date="1335669483000" expanded="true" signature="673:755" placeholder="..." />
+            <marker date="1335669483000" expanded="true" signature="777:847" placeholder="..." />
+            <marker date="1335669483000" expanded="true" signature="869:957" placeholder="..." />
+            <marker date="1335669483000" expanded="true" signature="979:1069" placeholder="..." />
+            <marker date="1335669483000" expanded="true" signature="1091:1167" placeholder="..." />
+            <marker date="1335669483000" expanded="true" signature="1189:1261" placeholder="..." />
+            <marker date="1335669483000" expanded="true" signature="1283:1355" placeholder="..." />
+            <marker date="1335669483000" expanded="true" signature="1379:1408" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/companies/_form.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="8" selection-start="1746" selection-end="1772" vertical-scroll-proportion="-27.791666">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/after_signup_wizard/company_details.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="22" selection-start="67" selection-end="131" vertical-scroll-proportion="-1.25">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="9" selection-start="663" selection-end="663" vertical-scroll-proportion="0.58564234">
+        <state line="24" column="11" selection-start="566" selection-end="566" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="11" selection-start="329" selection-end="329" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/helpers/after_signup_wizard_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/after_signup_wizard_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="30" selection-start="469" selection-end="469" vertical-scroll-proportion="0.49118388">
           <folding />
         </state>
       </provider>

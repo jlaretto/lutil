@@ -7,7 +7,7 @@ LegalUtility::Application.routes.draw do
 
   resources :users
 
-  resources :afterSignupWizard
+  resources :after_signup_wizard
 
   resources :companies
 

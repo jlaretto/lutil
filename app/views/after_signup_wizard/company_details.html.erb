@@ -1,3 +1,62 @@
 <h1>Post Signup Wizard</h1>
 <h2>Please enter Company Details:</h2>
-<%= render partial: 'companies/form'%>
+<%= form_for(@company, url: wizard_path, method: :put) do |f| %>
+    <% if @company.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
+
+          <ul>
+            <% @company.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="row">
+      <div class="span4">
+        <%= f.label :name, "Corporate Name" %>
+      </div><div class="span8">
+      <%= f.text_field :name %>
+    </div></div>
+
+    <div class="row">
+      <div class="span4">
+        &nbsp;
+      </div><div class="span4">
+      <span class="explanatory">Please enter the legal name of the entity you represent. The legal name requires a corporate designation appended at the end (e.g. Inc., Incorporated, Corp., Corporation or Limited.</span>
+    </div></div>
+    <br>
+    <%= render partial: "shared/address", locals: {f: f} %>
+    <br>
+    <div class="row">
+      <div class="span4">
+        <%= f.label :phone %>
+      </div><div class="span8">
+      <%= f.text_field :phone %>
+    </div></div>
+
+    <div class="row">
+      <div class="span4">
+        <%= f.label :fax, "Fax (Optional" %>
+      </div><div class="span8">
+      <%= f.text_field :fax %>
+    </div></div>
+
+    <div class="row">
+      <div class="span4">
+        <%= f.label :business_description, "Brief description of the business" %>
+      </div><div class="span8">
+      <%= f.text_area :business_description, rows: "5" %>
+    </div></div>
+    </div>
+
+    <div class="row">
+      <div class="span4">
+        &nbsp;
+      </div>
+      <div class="span8">
+        <%= f.submit "Next", class: "btn btn-large btn-primary" %>
+      </div>
+    </div>
+<% end %>
+<%= debug wizard_path %>

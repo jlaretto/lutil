@@ -160,5 +160,5 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)
-  wicked (= 0.1.4)
+  wicked
   will_paginate (= 3.0.3)
