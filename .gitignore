@@ -14,3 +14,6 @@
 /log/*.log
 /tmp
 bundler_stubs/
+
+# Ignore workspace
+.idea/*
