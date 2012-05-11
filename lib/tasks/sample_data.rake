@@ -9,7 +9,7 @@ namespace :db do
 end
 
 def create_users
-  User.create( name: "Jeff", email:"test@test.com", password: "test", password_confirmation: "test")
+  User.create( email:"test@test.com", password: "test", password_confirmation: "test")
 end
 
 def create_comps

@@ -39,6 +39,8 @@ class UsersController < ApplicationController
     if @user.save
       signUserIn(@user)
       sign_in_redirect_helper root_path
+    else
+      render "new"
     end
   end
 

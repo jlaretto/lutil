@@ -50,15 +50,15 @@ ActiveRecord::Schema.define(:version => 20120504022529) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                              :null => false
-    t.string   "name"
+    t.string   "email"
     t.integer  "person_id"
-    t.string   "session_token",                      :null => false
+    t.integer  "active_company_id"
+    t.string   "session_token"
     t.string   "password_digest"
-    t.boolean  "email_validated", :default => false
-    t.boolean  "admin_approved",  :default => true
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.boolean  "email_validated",   :default => false
+    t.boolean  "admin_approved",    :default => true
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -1,11 +1,12 @@
 class User < ActiveRecord::Base
   before_save :updateToken
 
-  attr_accessible :password_digest, :email, :name, :password_confirmation, :password
+  attr_accessible :password_digest, :email, :password_confirmation, :password
 
   has_secure_password
 
   belongs_to :person
+  belongs_to :active_company, class_name: "Company", foreign_key: :active_company_id
 
   def self.authenticate(email, password)
 
@@ -19,8 +20,7 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
 
-  validates :password, presence: true
-  validates :password_confirmation, presence: true
+
 
   private
 
