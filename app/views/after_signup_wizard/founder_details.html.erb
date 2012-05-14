@@ -1,39 +1,16 @@
 <h1>Post Signup Wizard</h1>
 <h2>Please enter Founders Details:</h2>
-<table>
-  <tr>
-    <th>Firstname</th>
-    <th>Middlename</th>
-    <th>Lastname</th>
-    <th>Entityname</th>
-    <th>Type</th>
-    <th>Streetaddress</th>
-    <th>City state zip</th>
-    <th>Country</th>
-    <th>Phone</th>
-    <th>Email</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div id="thumbs">
+<ul class="thumbnails">
+<% current_user.active_company.people.each do |p| %>
+    <%= render :partial => "person_thumbnail", :locals => { :person => p } %>
+<%	end  %>
+</div>
 
-  <% @people.each do |person| %>
-      <tr>
-        <td><%= person.firstname %></td>
-        <td><%= person.middlename %></td>
-        <td><%= person.lastname %></td>
-        <td><%= person.entityname %></td>
-        <td><%= person.type %></td>
-        <td><%= person.streetaddress %></td>
-        <td><%= person.city_state_zip %></td>
-        <td><%= person.country %></td>
-        <td><%= person.phone %></td>
-        <td><%= person.email %></td>
-        <td><%= link_to 'Show', person %></td>
-        <td><%= link_to 'Edit', edit_person_path(person) %></td>
-        <td><%= link_to 'Destroy', person, confirm: 'Are you sure?', method: :delete %></td>
-      </tr>
-  <% end %>
-</table>
+<%= simple_form_for(@person, url: wizard_path, method: :put, :html => { :class => 'well form-horizontal' }) do |f| %>
+   <%= render partial: 'person_form', locals: { f: f } %>
+    <%=  link_to "Next Step",next_wizard_path, class: "btn btn-small btn-primary"  %>
+<% end %>
 
+</ul>
 <br />

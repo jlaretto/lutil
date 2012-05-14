@@ -25,9 +25,22 @@
       </div><div class="span4">
       <span class="explanatory">Please enter the legal name of the entity you represent. The legal name requires a corporate designation appended at the end (e.g. Inc., Incorporated, Corp., Corporation or Limited.</span>
     </div></div>
-    <br>
-    <%= render partial: "shared/address", locals: {f: f} %>
-    <br>
+
+<div class="row">
+  <div class="span4">
+    <%= f.label :street_address %>
+  </div><div class="span8">
+  <%= f.text_field :street_address %>
+</div></div>
+
+<div class="row">
+  <div class="span4">
+    <%= f.label :city_state_zip %>
+  </div><div class="span8">
+  <%= f.text_field :city_state_zip %>
+</div></div>
+
+
     <div class="row">
       <div class="span4">
         <%= f.label :phone %>

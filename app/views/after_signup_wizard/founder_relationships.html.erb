@@ -1,0 +1,51 @@
+<h1>Post Signup Wizard</h1>
+<h2>Please enter Founders Relationship Details:</h2>
+<%=  debug @classes %>
+Incorporator:
+<%= form_for(:relationships, url: wizard_path, method: :put) do |o| %>
+<div class="btn-group<%= " active" if @classes[:incorporater].count > 0 %>" data-toggle="buttons-radio">
+  <% @founders.each do |f| %>
+      <button class="btn<%= " active" if @classes[:incorporater][f.id].present? %>"
+              onclick="action_to_take.value='<%= "#{f.id}|incorporater"%>'"><%=  format_name(f) %></button>
+  <% end %>
+  <button class="btn<%= " active" if @classes[:incorporater][-1].present? %>" onclick="action_to_take.value='-1|incorporater'"><%=  "#{current_user.active_company.name} is already incorporated" %>
+  </button>
+</div>
+
+
+Director(s):
+<div class="btn-group<%= " active" if @classes[:directors].count > 0 %>" data-toggle="buttons-checkbox">
+  <% @founders.each do |f| %>
+      <button class="btn<%= " active" if @classes[:directors][f.id].present? %>"
+              onclick="action_to_take.value='<%= "#{f.id}|directors"%>'">
+        <%=  format_name(f) %></button>
+  <% end %>
+</div>
+
+Required Offices:
+President:
+<div class="btn-group<%= " active" if @classes[:president].count >= 0 %>" data-toggle="buttons-radio">
+  <% @founders.each do |f| %>
+      <button class="btn<%= " active" if @classes[:president][f.id].present? %>"
+              onclick="action_to_take.value='<%= "#{f.id}|president"%>'"><%=  format_name(f) %></button>
+  <% end %>
+</div>
+Treasurer:
+<div class="btn-group<%= " active" if @classes[:treasurer].count >= 0 %>" data-toggle="buttons-radio">
+  <% @founders.each do |f| %>
+      <button class="btn<%= " active" if @classes[:treasurer][f.id].present? %>"
+              onclick="action_to_take.value='<%= "#{f.id}|treasurer"%>'"><%=  format_name(f) %></button>
+  <% end %>
+</div>
+Secretary:
+<div class="btn-group<%= " active" if @classes[:secretary].count >= 0 %>" data-toggle="buttons-radio">
+  <% @founders.each do |f| %>
+      <button class="btn<%= " active" if @classes[:secretary][f.id].present? %>"
+              onclick="action_to_take.value='<%= "#{f.id}|secretary"%>'"><%=  format_name(f) %></button>
+  <% end %>
+</div>
+<input type="hidden" name="update" id="action_to_take" value="" />
+<br>
+<%= o.submit "Save and Continue", class:"btn btn-primary"%>
+
+<% end %>

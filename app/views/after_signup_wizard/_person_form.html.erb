@@ -1,0 +1,10 @@
+
+<%= f.input :first_name, input_html: { class: 'input-small' } %>
+<%= f.input :middle_name, input_html: { class: 'input-mini' },   required: false %>
+<%= f.input :last_name,  input_html: { class: 'input-small' } %>
+<%= f.input :street_address %>
+<%= f.input :city_state_zip %>
+<%= f.input :country, :priority => [ "United States" ] %>
+<%= f.input :phone, required: false, :as => :tel %>
+<%= f.input :email %>
+<%= f.button :submit, :class => 'btn-primary' %>

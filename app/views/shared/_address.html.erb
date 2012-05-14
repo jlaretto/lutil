@@ -1,12 +1,7 @@
-<div class="row">
-  <div class="span4">
-    <%= f.label :street_address %>
-  </div><div class="span8">    <%= f.text_field :street_address %>
-</div></div>
-
-<div class="row">
-  <div class="span4">
-    <%= f.label :city_state_zip %>
-  </div><div class="span8">
-  <%= f.text_field :city_state_zip %>
-</div></div>
+<address>
+  <%= obj.street_address %><br>
+  <%= obj.city_state_zip %><br>
+  <% if obj.country.present? %>
+      <%= obj.country %><br>
+  <% end %>
+</address>

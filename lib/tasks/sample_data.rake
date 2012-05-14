@@ -20,8 +20,12 @@ end
 def create_persons
   5.times do |n|
     name  = Faker::Name.name
-    email = "example-#{n+1}@railstutorial.org"
-    Person.create(firstname: name, email: email)
+    email = Faker::Internet.email
+    street = Faker::Address.street_address
+    city = "#{Faker::Address.city}, #{Faker::Address.state_abbr} #{Faker::Address.zip_code}"
+    phone = Faker::PhoneNumber.phone_number
+
+    Person.create(first_name: name, email: email, street_address: street, city_state_zip: city, phone: phone )
   end
 end
 

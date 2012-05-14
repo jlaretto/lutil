@@ -26,12 +26,12 @@ ActiveRecord::Schema.define(:version => 20120504022529) do
   end
 
   create_table "people", :force => true do |t|
-    t.string   "firstname"
-    t.string   "middlename"
-    t.string   "lastname"
-    t.string   "entityname"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.string   "entity_name"
     t.string   "type"
-    t.string   "streetaddress"
+    t.string   "street_address"
     t.string   "city_state_zip"
     t.string   "country"
     t.string   "phone"
@@ -43,10 +43,10 @@ ActiveRecord::Schema.define(:version => 20120504022529) do
   create_table "relation_person_companies", :force => true do |t|
     t.integer  "person_id"
     t.integer  "company_id"
-    t.integer  "relationtype"
-    t.string   "relationdetail"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "relation_type"
+    t.string   "relation_detail"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "users", :force => true do |t|

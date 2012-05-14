@@ -1,0 +1,16 @@
+  <li class="span4">
+    <div class="thumbnail">
+      <h4><%= format_name(person) %></h4>
+      <%= render partial: "shared/address", locals: { obj: person } %>
+      <address>
+        <% if person.phone.present? %>
+            <%= format_phone(person) %><br>
+        <% end %>
+        <%= person.email %><br>
+      </address>
+      <div class="text-align: center">
+      <%= link_to "Edit", edit_person_path(person) %>
+      <%= link_to "Delete", edit_person_path(person), method: :delete, confirm: "Are you sure?" %>
+      </div>
+      <div>
+  </li>

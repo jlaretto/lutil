@@ -19,10 +19,17 @@ module SessionsHelper
   end
 
   def sign_in_redirect_helper (path)
-    if current_user.person.nil?
-      redirect_to after_signup_wizard_path(:company_details)
+    if session[:forwardURL].present?
+       #forward to the previously requested URL
+      redirect_to session[:forwardURL]
+      session.delete(:forwardURL)
     else
-      redirect_to path
+
+      if current_user.person.nil?
+        redirect_to after_signup_wizard_path(:company_details)
+      else
+        redirect_to path
+      end
     end
   end
 
@@ -31,7 +38,15 @@ module SessionsHelper
   end
 
   def redirect_if_not_signed_in
-     redirect_to signin_path unless !current_user.nil?
+    if current_user.nil?
+      session[:forwardURL] = request.fullpath
+      redirect_to signin_path
+    else
+      cookies["session_token"] = {value: current_user.session_token, expires: Time.now + 3600 }
+    end
+
+#     redirect_to signin_path unless !current_user.nil?
+
   end
 
 end

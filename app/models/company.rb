@@ -8,6 +8,8 @@ class Company < ActiveRecord::Base
 
 
   has_many :relation_person_companies
-  has_many :people, through: :relation_person_companies
+
+  #uniq collapses redundant records created by multiple relationships
+  has_many :people, through: :relation_person_companies, uniq: true
 
 end
