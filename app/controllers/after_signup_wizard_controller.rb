@@ -1,5 +1,6 @@
 class AfterSignupWizardController < ApplicationController
    include Wicked::Wizard
+   include AfterSignupWizardHelper
 
   before_filter :redirect_if_not_signed_in
 
@@ -27,29 +28,13 @@ class AfterSignupWizardController < ApplicationController
 
       when :initial_capitalization
         cumulative_percent = 100
-        @balanceID = 0
-        unless params[:balance_of_equity].nil?
-          @balanceID = Integer(params[:balance_of_equity])
-        end
+        @authorized_shares = 15000000
+        @issued_shares = 10000000
+        @buttons = [" active", "", ""]
 
-        @people = current_user.active_company.people
-        @percentages = {}
-        issueShares = Integer(params["issue_shares"] || 0)
-        @shares = {}
-        @people.each do |person|
+        initial_capitalizaton_set_values
 
-          unless @balanceID == person.id
-            pct = Integer(params["#{person.id}_percent"] || 0)
-            @percentages[person.id] = pct
-            @shares[person.id] =  issueShares * (Float(pct) / 100)
-            cumulative_percent -= pct
-          end
 
-        end
-        unless @balanceID == 0
-          @shares[@balanceID] = Integer(issueShares * (Float(cumulative_percent) / 100))
-          @percentages[@balanceID] = cumulative_percent
-        end
     end
     render_wizard
   end
@@ -165,6 +150,15 @@ class AfterSignupWizardController < ApplicationController
           end
 
         @founders = current_user.active_company.people
+
+      when :initial_capitalization
+        @authorized_shares = parse_int(params[:authorized_shares])
+        @issued_shares = parse_int(params[:issued_shares])
+        @buttons = ["", "", ""]
+        @buttons[Integer(params[:button_index])] = " active"
+
+        initial_capitalizaton_set_values
+
     end
     render_wizard
   end
@@ -185,31 +179,35 @@ private
     end
   end
 
-  def buildClassesArrayFromRelationships
-    @classes = {incorporater: {}, directors: {}, secretary: {}, treasurer: {}, president: {}}
-=begin    current_user.active_company.relation_person_companies.each do |rel|
-      case rel.relation_type
-        when "officer"
-          @classes[:director]["#{rel.person_id}|#{rel.relation_detail}"] = true
-             # @classes[:director]["#{rel.person_id}|director"] = true
-          end
-        when "director"
-          @classes[:director]["#{rel.person_id}|director"] = true
-
-        when "incorporater"
-          @classes[:incorporater]["#{rel.person_id}|incorporater"] = true
-
-      end
-      #relation_detail
+  def initial_capitalizaton_set_values
+    cumulative_percent = Float(100)
+    @balance_person_id = -1
+    unless params[:balance_of_equity].nil?
+      @balance_person_id = Integer(params[:balance_of_equity])
     end
-=end
-   end
-  def unpackHash
-#    @arrHighLevel = params[:classes].split(',')
- #   @classes = {}
-  #  @arrHighLevel.each do |i|
-   #   @entry =
-   # end
+
+    @people = current_user.active_company.people
+    @percentages = {}
+    @shares = {}
+    @people.each do |person|
+
+      unless @balanceID == person.id
+        pct = Float(params["#{person.id}_percent"] || 0)
+        @percentages[person.id] = pct
+        @shares[person.id] =  Integer(@issued_shares * (pct / Float(100)))
+        cumulative_percent -= pct
+      end
+
+    end
+    unless @balance_person_id == -1
+      @shares[@balance_person_id] = Integer(@issued_shares * (cumulative_percent / Float(100)))
+      @percentages[@balance_person_id] = cumulative_percent
+    end
   end
+
+
+    def buildClassesArrayFromRelationships
+    @classes = {incorporater: {}, directors: {}, secretary: {}, treasurer: {}, president: {}}
+   end
 
 end
