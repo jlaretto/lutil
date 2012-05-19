@@ -1,4 +1,8 @@
 LegalUtility::Application.routes.draw do
+  get "capitalization_table/create"
+
+  get "capitalization_table/show"
+
   get "session/create"
 
   get "session/destroy"

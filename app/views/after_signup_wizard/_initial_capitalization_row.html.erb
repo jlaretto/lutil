@@ -1,9 +1,13 @@
 <tr>
   <td><%= format_name(person) %></td>
   <td><%= radio_button_tag "balance_of_equity", person.id, @balance_person_id == person.id, :onclick => "capForm.submit()" %></td>
-  <td><%= number_field_tag "#{person.id}_percent", @percentages[person.id].to_s, min: 0, max: 100, size: 50 %></td>
-  <td><%= label_tag "numberShares", number_with_delimiter(@shares[person.id]) %></td>
-  <td>100%</td>
-  <td>100%</td>
+<%if @balance_person_id == person.id %>
+      <td><%= number_field_tag "#{person.id}_percent", @percentages[person.id].to_s, min: 0, max: 100, size: 50, disabled: true %></td>
+<% else %>
+      <td><%= number_field_tag "#{person.id}_percent", @percentages[person.id].to_s, min: 0, max: 100, size: 50 %></td>
+<% end %>
+  <td><%= label_tag "numberShares", number_with_delimiter(@shares[person.id][:shares]) %></td>
+  <td><%= @shares[person.id][:percent]%>% </td>
+  <td><%= @shares[person.id][:percent_fd]%>% </td>
 
 </tr>

@@ -9,13 +9,21 @@
 <body>
 
 <%= render 'layouts/header' %>
+<div class="container-fluid">
+  <div class="row-fluid">
 
-<% flash.each do |key, value|%>
-    <div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
-
-<%= yield %>
-
+    <% if userSignedIn? %>
+    <%=  render 'layouts/sidebar' %>
+    <% end %>
+      <div class="span9">
+      <div class="hero-unit">
+        <% flash.each do |key, value|%>
+            <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+        <%= yield %>
+      </div>
+    </div>
+ </div>
 <%= render 'layouts/footer' %>
 </body>
 </html>

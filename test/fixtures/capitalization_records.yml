@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  capitalization_table_id: 1
+  description: MyString
+  authorized_amount: 1.5
+
+two:
+  capitalization_table_id: 1
+  description: MyString
+  authorized_amount: 1.5

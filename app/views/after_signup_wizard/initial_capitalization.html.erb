@@ -1,5 +1,5 @@
-<h1>StaticPages#initial_capitalization</h1>
-<p>Find me in app/views/static_pages/initial_capitalization.html.erb</p>
+<h2>Configure Initial Capitalization</h2>
+<br>
 <%= form_tag "initial_capitalization", method: :put, url: wizard_path, id: "capForm" do %>
   <table>
     <tr>
@@ -20,7 +20,8 @@
       </td>
     </tr>
   </table>
-  <h1>Founder Capitalizaton:</h1>
+  <br>
+  <h2>Founder Capitalizaton:</h2>
   <table  class="table table-striped">
   <thead>
   <tr>
@@ -34,16 +35,19 @@
   </thead>
   <tbody>
     <%= render partial: 'initial_capitalization_row', collection: @people, as: :person %>
-    <tr>
-      <td colspan="2"><h3><em>Founder Total:</em></h3></td>
-      <td>100%</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-
+     <% if @pool_option == :founder %>
+      <tr>
+        <td>Equity Pool</td>
+        <td> &nbsp; </td>
+        <td><%= number_field_tag "pool_percent", @pool_percent, min: 0, max: 100 %></td>
+        <td><%= label_tag "numberShares", number_with_delimiter(@pool_shares) %></td>
+        <td>100%</td>
+        <td>100%</td>
+      </tr>
+  <% end %>
   </tbody>
 </table>
+  <% if @pool_option == :founder_and_pool %>
     <h1>Founder + Option Pool:</h1>
     <table  class="table table-striped">
       <thead>
@@ -67,15 +71,22 @@
       <tr>
         <td><em>Equity Incentive Plan</em></td>
         <td>&nbsp;</td>
-        <td><%= number_field_tag "eip_percent", "0", min: 0, max: 100 %></td>
-        <td><%= label_tag "numberShares", "0" %></td>
+        <td><%= number_field_tag "pool_percent", @pool_percent, min: 0, max: 100 %></td>
+        <td><%= label_tag "numberShares", number_with_delimiter(@pool_shares) %></td>
         <td>100%</td>
         <td>100%</td>
       </tr>
       </tbody>
     </table>
-    <input type="hidden" name="button_index" id="button_index" value="0" />
-<%= submit_tag "Save" %>
+  <% end %>
+    <input type="hidden" name="button_index" value="0" />
+    <input type="hidden" name="old_balance_person_id" value="<%=@balance_person_id%>" />
+    <% if @pool_option == :none %>
+    <input type="hidden" name="pool_percent" value="<%=@pool_percent%>" />
+    <% end %>
+<%= submit_tag "Update", class:"btn btn-primary" %>&nbsp;&nbsp;<%= submit_tag "Save", disabled: true, class:"btn btn-primary" %>
 <%end%>
+
+<%= debug @pool_option %>
 <%= debug @shares %>
 <%= debug @percentages %>

@@ -23,7 +23,7 @@ class AfterSignupWizardController < ApplicationController
 
       when :founder_relationships
         @founders = current_user.active_company.people
-        buildClassesArrayFromRelationships
+        @classes = {incorporater: {}, directors: {}, secretary: {}, treasurer: {}, president: {}}
         session[:classes] = @classes
 
       when :initial_capitalization
@@ -31,6 +31,9 @@ class AfterSignupWizardController < ApplicationController
         @authorized_shares = 15000000
         @issued_shares = 10000000
         @buttons = [" active", "", ""]
+        @old_balance_person_id = -1
+        @pool_option = :founder
+        @pool_percent = 0.0
 
         initial_capitalizaton_set_values
 
@@ -156,6 +159,21 @@ class AfterSignupWizardController < ApplicationController
         @issued_shares = parse_int(params[:issued_shares])
         @buttons = ["", "", ""]
         @buttons[Integer(params[:button_index])] = " active"
+        @pool_percent = Float(params[:pool_percent])
+
+        case Integer(params[:button_index])
+          when 0
+            @pool_option = :founder
+          when 1
+            @pool_option = :founder_and_pool
+          else
+          @pool_option = :none
+        end
+
+
+
+        @balance_person_id = -1
+        @old_balance_person_id = Integer(params[:old_balance_person_id])
 
         initial_capitalizaton_set_values
 
@@ -179,35 +197,70 @@ private
     end
   end
 
+
+
+
   def initial_capitalizaton_set_values
+
     cumulative_percent = Float(100)
     @balance_person_id = -1
-    unless params[:balance_of_equity].nil?
+
+    if params[:balance_of_equity].nil?
+      @balance_person_id = @old_balance_person_id
+    else
       @balance_person_id = Integer(params[:balance_of_equity])
     end
 
     @people = current_user.active_company.people
+
     @percentages = {}
     @shares = {}
-    @people.each do |person|
 
-      unless @balanceID == person.id
-        pct = Float(params["#{person.id}_percent"] || 0)
+    #set the denominaters
+    if @pool_option == :founder
+      #if we are in the option where pool and founder group, deduct the pool
+      cumulative_percent -= @pool_percent  unless @pool_option == :founder_and_pool
+      issued_shares = (@issued_shares - @issued_shares * @pool_percent) / 100
+      fully_diluted_shares = @issued_shares
+      @pool_shares = (@issued_shares * @pool_percent)/100
+    else
+      issued_shares = @issued_shares
+      fully_diluted_shares = @issued_shares / (1.0 - (@pool_percent/100))
+      @pool_shares = Integer(issued_shares - fully_diluted_shares)
+    end
+
+
+
+    # toggle throug all people and calibrate percentages
+    @people.each do |person|
+      unless @balance_person_id == person.id
+        if(@old_balance_person_id == person.id)
+          # this person previously had the balance, but no longer
+          pct = 0
+        else
+          # pluck percentage from form
+          pct = Float(params["#{person.id}_percent"] || 0)
+        end
         @percentages[person.id] = pct
-        @shares[person.id] =  Integer(@issued_shares * (pct / Float(100)))
+
+        #shares
+        shares =  Integer(@issued_shares * (pct / Float(100)))
+        @shares[person.id] = { shares: shares,
+                               percent: shares/Float(issued_shares)*100,
+                               percent_fd: shares/Float(fully_diluted_shares)*100 }
         cumulative_percent -= pct
       end
-
     end
+
+
+
+    #if a person is designated to receive the balance of equity, assign the balance
     unless @balance_person_id == -1
-      @shares[@balance_person_id] = Integer(@issued_shares * (cumulative_percent / Float(100)))
-      @percentages[@balance_person_id] = cumulative_percent
+      shares = Integer(@issued_shares * (cumulative_percent / Float(100)))
+      @shares[@balance_person_id] = { shares: shares,
+                             percent: shares/Float(issued_shares)*100,
+                             percent_fd: shares/Float(fully_diluted_shares)*100 }
+
     end
   end
-
-
-    def buildClassesArrayFromRelationships
-    @classes = {incorporater: {}, directors: {}, secretary: {}, treasurer: {}, president: {}}
-   end
-
 end

@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  capitalization_table_id: 1
+  capitalization_record_id: 1
+  amount: 1.5
+  grant_date: 2012-05-18 01:29:06
+  vesting_schedule_id: 1
+  equity_type: MyString
+  relation_from_id: 1
+  relation_from_description: MyString
+  relation_to_id: 1
+  relation_to_description: MyString
+
+two:
+  capitalization_table_id: 1
+  capitalization_record_id: 1
+  amount: 1.5
+  grant_date: 2012-05-18 01:29:06
+  vesting_schedule_id: 1
+  equity_type: MyString
+  relation_from_id: 1
+  relation_from_description: MyString
+  relation_to_id: 1
+  relation_to_description: MyString
