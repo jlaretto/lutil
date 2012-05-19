@@ -30,19 +30,34 @@
     <th class="percent_column">Target %</th>
     <th class="shares" >Number of Shares</th>
     <th class="percent_column">% Ownership</th>
-    <th class="percent_column">% Fully Diluted</th>
+    <th class="percent_column">
+      <% if @pool_option == :founder %>
+          % Fully Diluted
+      <% else %>
+          &nbsp;
+      <% end %>
+
+    </th>
   </tr>
   </thead>
   <tbody>
-    <%= render partial: 'initial_capitalization_row', collection: @people, as: :person %>
+    <%= render partial: 'initial_capitalization_row', collection: @people, as: :person, locals: {pool_option: @pool_option} %>
      <% if @pool_option == :founder %>
       <tr>
         <td>Equity Pool</td>
         <td> &nbsp; </td>
         <td><%= number_field_tag "pool_percent", @pool_percent, min: 0, max: 100 %></td>
         <td><%= label_tag "numberShares", number_with_delimiter(@pool_shares) %></td>
-        <td>100%</td>
-        <td>100%</td>
+        <td>&nbsp;</td>
+        <td><%= "%3.1f" % @pool_percent %>%</td>
+      </tr>
+      <tr>
+        <td>Totals:</td>
+        <td> &nbsp; </td>
+        <td>&nbsp;</td>
+        <td><%= number_with_delimiter(@issued_shares) %></td>
+        <td><%=  "%3.1f" % (100.0 - @pool_percent) %>%</td>
+        <td> 100.0%</td>
       </tr>
   <% end %>
   </tbody>
@@ -57,7 +72,9 @@
         <th class="percent_column">Pool %</th>
         <th class="shares" >&nbsp;</th>
         <th class="percent_column">&nbsp;</th>
-        <th class="percent_column">% Fully Diluted</th>
+        <th class="percent_column">
+          % Fully Diluted
+        </th>
       </tr>
       </thead>
 
@@ -84,7 +101,7 @@
     <% if @pool_option == :none %>
     <input type="hidden" name="pool_percent" value="<%=@pool_percent%>" />
     <% end %>
-<%= submit_tag "Update", class:"btn btn-primary" %>&nbsp;&nbsp;<%= submit_tag "Save", disabled: true, class:"btn btn-primary" %>
+<%= submit_tag "Update", class:"btn btn-primary" %>&nbsp;&nbsp;<%= submit_tag "Save", disabled: !@allow_to_save, class:"btn btn-primary" %>
 <%end%>
 
 <%= debug @pool_option %>

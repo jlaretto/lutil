@@ -21,5 +21,14 @@ module ApplicationHelper
   def format_shares(num)
     number_with_delimiter(Integer(num))
   end
+
+  #TODO: this probably can be fixed
+  def jeff_parse_float(val)
+    if val.nil?
+      Float(0)
+    else
+      val.to_s.gsub(",", "").to_f
+    end
+  end
 end
 

@@ -7,7 +7,12 @@
       <td><%= number_field_tag "#{person.id}_percent", @percentages[person.id].to_s, min: 0, max: 100, size: 50 %></td>
 <% end %>
   <td><%= label_tag "numberShares", number_with_delimiter(@shares[person.id][:shares]) %></td>
-  <td><%= @shares[person.id][:percent]%>% </td>
-  <td><%= @shares[person.id][:percent_fd]%>% </td>
-
+  <td><%= "%3.1f" % @shares[person.id][:percent]%>% </td>
+  <td>
+    <% if pool_option == :founder %>
+    <%= "%3.1f" % @shares[person.id][:percent_fd]%>%
+    <% else %>
+    &nbsp;
+    <% end %>
+    </td>
 </tr>

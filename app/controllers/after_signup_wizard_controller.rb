@@ -1,6 +1,7 @@
 class AfterSignupWizardController < ApplicationController
    include Wicked::Wizard
    include AfterSignupWizardHelper
+   include ApplicationHelper
 
   before_filter :redirect_if_not_signed_in
 
@@ -27,13 +28,13 @@ class AfterSignupWizardController < ApplicationController
         session[:classes] = @classes
 
       when :initial_capitalization
-        cumulative_percent = 100
-        @authorized_shares = 15000000
-        @issued_shares = 10000000
+        cumulative_percent = Float(100)
+        @authorized_shares = Float(15000000)
+        @issued_shares = Float(10000000)
         @buttons = [" active", "", ""]
         @old_balance_person_id = -1
         @pool_option = :founder
-        @pool_percent = 0.0
+        @pool_percent = Float(0)
 
         initial_capitalizaton_set_values
 
@@ -155,11 +156,11 @@ class AfterSignupWizardController < ApplicationController
         @founders = current_user.active_company.people
 
       when :initial_capitalization
-        @authorized_shares = parse_int(params[:authorized_shares])
-        @issued_shares = parse_int(params[:issued_shares])
+        @authorized_shares = jeff_parse_float(params[:authorized_shares])
+        @issued_shares = jeff_parse_float(params[:issued_shares])
         @buttons = ["", "", ""]
         @buttons[Integer(params[:button_index])] = " active"
-        @pool_percent = Float(params[:pool_percent])
+        @pool_percent = jeff_parse_float(params[:pool_percent])
 
         case Integer(params[:button_index])
           when 0
@@ -176,6 +177,27 @@ class AfterSignupWizardController < ApplicationController
         @old_balance_person_id = Integer(params[:old_balance_person_id])
 
         initial_capitalizaton_set_values
+
+        if params[:commit] == "Save"
+           #save transaction and redirect
+          #1 Create cap table
+          capTable = CapitalizationTable.new(description: "Initial Capitalization", actual:true, company: current_user.active_company).save
+          #2 Create common stock cap record
+          capRecord = CapitalizationRecord.new(desription: "Common Stock", authorized_amount: @authorized_shares, capitalization_table: capTable).save
+          #3 Create plan (if applicable) - attache to common stock cap record
+          equityPlan = EquityPlan.new(description: "2012 Equity Incentive Plan", authorized_amount: @pool_shares, captitalization_record: capRecord ).save
+          #4 Iterate people and create equity records
+          current_user.active_company.people.each do |founder|
+            #todo
+
+
+          end
+
+          #redirect to root path
+
+
+
+        end
 
     end
     render_wizard
@@ -220,12 +242,14 @@ private
     if @pool_option == :founder
       #if we are in the option where pool and founder group, deduct the pool
       cumulative_percent -= @pool_percent  unless @pool_option == :founder_and_pool
-      issued_shares = (@issued_shares - @issued_shares * @pool_percent) / 100
+      issued_shares = @issued_shares - (@issued_shares * @pool_percent / 100.0)
       fully_diluted_shares = @issued_shares
-      @pool_shares = (@issued_shares * @pool_percent)/100
-    else
+      @pool_shares = ((@issued_shares * @pool_percent)/100.0).to_i
+    elsif @pool_option == :none
+      issued_shares = fully_diluted_shares = @issued_shares
+    elsif
       issued_shares = @issued_shares
-      fully_diluted_shares = @issued_shares / (1.0 - (@pool_percent/100))
+      fully_diluted_shares = @issued_shares / (1.0 - (@pool_percent/100.0))
       @pool_shares = Integer(issued_shares - fully_diluted_shares)
     end
 
@@ -236,31 +260,42 @@ private
       unless @balance_person_id == person.id
         if(@old_balance_person_id == person.id)
           # this person previously had the balance, but no longer
-          pct = 0
+          pct = 0.0
         else
           # pluck percentage from form
-          pct = Float(params["#{person.id}_percent"] || 0)
+          pct = jeff_parse_float(params["#{person.id}_percent"] || 0)
         end
         @percentages[person.id] = pct
 
         #shares
         shares =  Integer(@issued_shares * (pct / Float(100)))
         @shares[person.id] = { shares: shares,
-                               percent: shares/Float(issued_shares)*100,
-                               percent_fd: shares/Float(fully_diluted_shares)*100 }
+                               percent: shares / issued_shares * 100,
+                               percent_fd: shares / fully_diluted_shares * 100 }
         cumulative_percent -= pct
       end
     end
 
 
+    if cumulative_percent < 0
+      flash[:error] = "You have allocated more than 100% - please reduce the allocations so that the sum equals 100%"
+      cumulative_percent = 0
+      @allow_to_save = false
+    else
+      flash.clear
+      @allow_to_save = true
+    end
+
 
     #if a person is designated to receive the balance of equity, assign the balance
     unless @balance_person_id == -1
-      shares = Integer(@issued_shares * (cumulative_percent / Float(100)))
+      shares = Integer(@issued_shares * (cumulative_percent / 100))
       @shares[@balance_person_id] = { shares: shares,
-                             percent: shares/Float(issued_shares)*100,
-                             percent_fd: shares/Float(fully_diluted_shares)*100 }
+                             percent: shares/issued_shares*100,
+                             percent_fd: shares/fully_diluted_shares*100 }
 
     end
+
+
   end
 end

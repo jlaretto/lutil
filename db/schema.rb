@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120504022529) do
+ActiveRecord::Schema.define(:version => 20120519152031) do
+
+  create_table "capitalization_records", :force => true do |t|
+    t.integer  "capitalization_table_id"
+    t.string   "description"
+    t.float    "authorized_amount"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  create_table "capitalization_tables", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "description"
+    t.boolean  "actual"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -23,6 +39,32 @@ ActiveRecord::Schema.define(:version => 20120504022529) do
     t.string   "business_description"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+  end
+
+  create_table "equity_plans", :force => true do |t|
+    t.string   "name"
+    t.integer  "capitalization_record_id"
+    t.float    "amount"
+    t.datetime "board_approval_date"
+    t.string   "stockholder_approval_date"
+    t.string   "amendment_history"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  create_table "equity_records", :force => true do |t|
+    t.integer  "capitalization_table_id"
+    t.integer  "capitalization_record_id"
+    t.float    "amount"
+    t.datetime "grant_date"
+    t.integer  "vesting_schedule_id"
+    t.string   "equity_type"
+    t.integer  "relation_from_id"
+    t.string   "relation_from_description"
+    t.integer  "relation_to_id"
+    t.string   "relation_to_description"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "people", :force => true do |t|
