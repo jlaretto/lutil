@@ -2,6 +2,10 @@ module ApplicationHelper
 
   include ActionView::Helpers::NumberHelper
 
+  def company_context_present?
+    current_user.present? && current_user.active_company.present?
+  end
+
   #probably should be refactored!
   def format_name(person)
 

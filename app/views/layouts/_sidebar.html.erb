@@ -2,9 +2,12 @@
   <div class="well sidebar-nav">
     <ul class="nav nav-list">
       <li class="nav-header">Sidebar</li>
-      <li><a href="#">Urgent Tasks</a></li>
-      <li><a href="#">People</a></li>
-      <li><a href="#">Capitalization</a></li>
+      <% if current_user.active_company.present? %>
+
+        <li><a href="#">Urgent Tasks</a></li>
+          <li><a href="#">People</a></li>
+        <li><%=  link_to "Capitalization", company_capitalization_tables_path(current_user.active_company)  %></li>
+
       <li class="nav-header">Sidebar</li>
       <li><a href="#">Request Options</a></li>
       <li><a href="#">Model Financing</a></li>
@@ -16,6 +19,11 @@
       <li><a href="#">Link</a></li>
       <li><a href="#">Link</a></li>
       <li><a href="#">Link</a></li>
+      <% else %>
+          <li><a href="#">To Come</a></li>
+          <li><a href="#">To Come</a></li>
+          <li><a href="#">To Come</a></li>
+      <% end %>
     </ul>
   </div><!--/.well -->
 </div><!--/span-->

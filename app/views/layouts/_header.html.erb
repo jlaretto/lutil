@@ -1,7 +1,10 @@
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "LUtility", '#', id: "logo" %>
+      <span class="header">Legal Process Hub</span>
+      <% if company_context_present? %>
+        <span class="header"> - <%=  current_user.active_company.name %> </span>
+      <%  end %>
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home",    root_path %></li>

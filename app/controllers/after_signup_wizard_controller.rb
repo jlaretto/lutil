@@ -45,7 +45,7 @@ class AfterSignupWizardController < ApplicationController
 
   def update
 
-
+    adjust_step_for_user_state
 
 
     case step
@@ -179,18 +179,31 @@ class AfterSignupWizardController < ApplicationController
         initial_capitalizaton_set_values
 
         if params[:commit] == "Save"
-           #save transaction and redirect
-          #1 Create cap table
-          capTable = CapitalizationTable.new(description: "Initial Capitalization", actual:true, company: current_user.active_company).save
-          #2 Create common stock cap record
-          capRecord = CapitalizationRecord.new(desription: "Common Stock", authorized_amount: @authorized_shares, capitalization_table: capTable).save
-          #3 Create plan (if applicable) - attache to common stock cap record
-          equityPlan = EquityPlan.new(description: "2012 Equity Incentive Plan", authorized_amount: @pool_shares, captitalization_record: capRecord ).save
-          #4 Iterate people and create equity records
-          current_user.active_company.people.each do |founder|
-            #todo
+
+          ActiveRecord::Base.transaction do
 
 
+             #save transaction and redirect
+            #1 Create cap table
+            capTable = CapitalizationTable.new(description: "Initial Capitalization", actual: true, company: current_user.active_company)
+            capTable.save!
+
+            #2 Create common stock cap record
+            capRecord = CapitalizationRecord.new(description: "Common Stock", authorized_amount: @authorized_shares, capitalization_table: capTable)
+            capRecord.save!
+
+            #3 Create plan (if applicable) - attache to common stock cap record
+            equityPlan = EquityPlan.new(description: "2012 Equity Incentive Plan", authorized_amount: @pool_shares, capitalization_record: capRecord )
+            equityPlan.save!
+
+            #4 Iterate people and create equity records
+            current_user.active_company.people.each do |founder|
+              #todo create constnats
+               EquityRecord.new(amount: @shares[founder.id][:shares], equity_type: "Restricted Stock", capitalization_record: capRecord).save!
+            end
+
+            flash[:success] = "Wizard completed!"
+            redirect_path = root_path
           end
 
           #redirect to root path
@@ -200,7 +213,12 @@ class AfterSignupWizardController < ApplicationController
         end
 
     end
-    render_wizard
+
+    if redirect_path.nil?
+      render_wizard
+    else
+      redirect_to redirect_path
+    end
   end
 
 
@@ -208,6 +226,11 @@ class AfterSignupWizardController < ApplicationController
 
 private
   def adjust_step_for_user_state
+
+    if current_user.active_company.nil?
+      jump_to :company_details
+    end
+
     # push past company step
     if step == :company_details && current_user.active_company.present?
       skip_step
@@ -217,6 +240,9 @@ private
     if step == :your_details && current_user.person.present?
       skip_step
     end
+
+
+
   end
 
 

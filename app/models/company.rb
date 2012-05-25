@@ -11,5 +11,8 @@ class Company < ActiveRecord::Base
 
   #uniq collapses redundant records created by multiple relationships
   has_many :people, through: :relation_person_companies, uniq: true
-
+  has_many :capitalization_tables
+  has_many :capitalization_records, through: :capitalization_tables
+  has_many :equity_records, through: :capitalization_records
+  has_many :equity_plans, through: :capitalization_records
 end

@@ -1,8 +1,9 @@
 class CreateEquityRecords < ActiveRecord::Migration
   def change
     create_table :equity_records do |t|
-      t.integer :capitalization_table_id
+
       t.integer :capitalization_record_id
+      t.integer :person_id
       t.float :amount
       t.datetime :grant_date
       t.integer :vesting_schedule_id

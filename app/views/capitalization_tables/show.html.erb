@@ -1,0 +1,26 @@
+<h1>Capitalization Tables</h1>
+
+<table  class="table table-striped">
+  <thead>
+  <tr>
+    <th>Class</th>
+    <th class="shares">Authorized Amount</th>
+    <th class="shares">Issued Amount</th>
+    <th class="shares" >Number of Shares</th>
+    <th class="percent_column">% Ownership</th>
+    <th class="percent_column">% Fully Diluted</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @capitalization_records.each do |capRecord| %>
+  <tr>
+    <td colspan="6"><%=  capRecord.description %></td>
+  </tr>
+      <% capRecord.equity_records.each do |equityRecord| %>
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+      <% end %>
+  <% end %>
+  </tbody>
+</table>

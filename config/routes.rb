@@ -13,9 +13,13 @@ LegalUtility::Application.routes.draw do
 
   resources :after_signup_wizard
 
-  resources :companies
+  resources :companies do
+    resources :capitalization_tables, only: [:show, :index]
+  end
 
   resources :sessions, only: [:new, :create, :destroy]
+
+
 
   match '/signup', to: 'users#new'
   match '/signin', to: 'sessions#new'

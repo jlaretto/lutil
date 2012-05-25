@@ -42,9 +42,9 @@ ActiveRecord::Schema.define(:version => 20120519152031) do
   end
 
   create_table "equity_plans", :force => true do |t|
-    t.string   "name"
+    t.string   "description"
     t.integer  "capitalization_record_id"
-    t.float    "amount"
+    t.float    "authorized_amount"
     t.datetime "board_approval_date"
     t.string   "stockholder_approval_date"
     t.string   "amendment_history"
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(:version => 20120519152031) do
   end
 
   create_table "equity_records", :force => true do |t|
-    t.integer  "capitalization_table_id"
     t.integer  "capitalization_record_id"
+    t.integer  "person_id"
     t.float    "amount"
     t.datetime "grant_date"
     t.integer  "vesting_schedule_id"
