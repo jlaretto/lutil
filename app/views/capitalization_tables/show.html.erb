@@ -3,12 +3,16 @@
 <table  class="table table-striped">
   <thead>
   <tr>
-    <th>Class</th>
+    <th class="shares">Class</th>
     <th class="shares">Authorized Amount</th>
     <th class="shares">Issued Amount</th>
     <th class="shares" >Number of Shares</th>
     <th class="percent_column">% Ownership</th>
     <th class="percent_column">% Fully Diluted</th>
+    <% if @proforma %>
+        <th class="percent_column">% PF Ownership</th>
+        <th class="percent_column">% PF Fully Diluted</th>
+    <% end %>
   </tr>
   </thead>
   <tbody>
@@ -17,10 +21,111 @@
     <td colspan="6"><%=  capRecord.description %></td>
   </tr>
       <% capRecord.equity_records.each do |equityRecord| %>
-      <tr>
+      <% if equityRecord.equity_plan.nil? %>
+          <tr>
+        <td>&nbsp;&nbsp;&nbsp;<%= equityRecord.person.formatted_name %> </td>
         <td>&nbsp;</td>
+        <td><%=  equityRecord.equity_type %></td>
+        <td><%= format_shares(equityRecord.amount) %></td>
+        <td><%= format_percent(equityRecord.amount/@outstanding_shares) %></td>
+        <td><%= format_percent(equityRecord.amount/@fully_diluted_shares) %></td>
+            <% if @proforma %>
+                <td> TODO </td>
+                <td> TODO </td>
+            <% end %>
       </tr>
       <% end %>
+      <% end %>
   <% end %>
+
+
+  <% @equityPlans.each do |equityPlan| %>
+      <tr>
+        <td colspan="6"><%=  equityPlan.description %></td>
+      </tr>
+      <% equityPlan.equity_records.each do |equityRecord| %>
+          <tr>
+            <td>&nbsp;&nbsp;&nbsp;<%= equityRecord.person.formatted_name %> </td>
+            <td>&nbsp;</td>
+            <td><%=  equityRecord.equity_type %></td>
+            <td><%= format_shares(equityRecord.amount) %></td>
+            <td><%= format_percent(equityRecord.amount/@outstanding_shares) %></td>
+            <td><%= format_percent(equityRecord.amount/@fully_diluted_shares) %></td>
+            <% if @proforma %>
+                <td> TODO </td>
+                <td> TODO </td>
+            <% end %>
+
+          </tr>
+      <% end %>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;<%= "Available" %> </td>
+        <td>&nbsp;</td>
+
+        <td>&nbsp;</td>
+        <td><%= format_shares(equityPlan.available_shares) %></td>
+        <td>&nbsp;</td>
+        <td><%= format_percent(equityPlan.available_shares/@fully_diluted_shares) %></td>
+        <% if @proforma %>
+            <td> TODO </td>
+            <td> TODO </td>
+        <% end %>
+
+      </tr>
+
+  <% end %>
+  <tr>
+    <td>Total</td>
+    <td>&nbsp;</td>
+
+    <td>&nbsp;</td>
+    <td><%= format_shares(@fully_diluted_shares) %></td>
+    <td>&nbsp;</td>
+    <td><%= format_percent(1) %></td>
+    <% if @proforma %>
+        <td> TODO </td>
+        <td> TODO </td>
+    <% end %>
+
+  </tr>
+
+
+
   </tbody>
 </table>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@new_equity_record) do |f| %>
+        <% if @new_equity_record.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@new_equity_record.errors.count, "error") %> prohibited this record from being saved:</h2>
+
+              <ul>
+                <% @new_equity_record.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+        <!-- attr_accessible :amount,
+
+        :equity_type,
+        :capitalization_record,
+        :person,
+        :equity_plan,
+        :proforma_target_amount_type
+-->
+
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+        <%= f.label :password_confirmation, "Confirm" %>
+        <%= f.password_field :password_confirmation %>
+        <br>
+        <%= f.submit %>
+    <% end %>
+ </div>
+

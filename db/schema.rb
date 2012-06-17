@@ -59,10 +59,13 @@ ActiveRecord::Schema.define(:version => 20120519152031) do
     t.datetime "grant_date"
     t.integer  "vesting_schedule_id"
     t.string   "equity_type"
+    t.integer  "equity_plan_id"
     t.integer  "relation_from_id"
     t.string   "relation_from_description"
     t.integer  "relation_to_id"
     t.string   "relation_to_description"
+    t.string   "certificate_number"
+    t.integer  "record_number"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end

@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  description: MyString
+  type: 
+  responsible_user_id: 1
+  urgency: MyString
+  instructions: MyString
+  answer: MyString
+  deadline: 2012-05-25 22:19:20
+  last_ping: 2012-05-25 22:19:20
+  next_ping: 2012-05-25 22:19:20
+  task_list_id: 1
+
+two:
+  description: MyString
+  type: 
+  responsible_user_id: 1
+  urgency: MyString
+  instructions: MyString
+  answer: MyString
+  deadline: 2012-05-25 22:19:20
+  last_ping: 2012-05-25 22:19:20
+  next_ping: 2012-05-25 22:19:20
+  task_list_id: 1

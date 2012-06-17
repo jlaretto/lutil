@@ -1,11 +1,4 @@
 LegalUtility::Application.routes.draw do
-  get "capitalization_table/create"
-
-  get "capitalization_table/show"
-
-  get "session/create"
-
-  get "session/destroy"
 
   resources :people
 
@@ -15,6 +8,8 @@ LegalUtility::Application.routes.draw do
 
   resources :companies do
     resources :capitalization_tables, only: [:show, :index]
+    resources :documents
+    resources :status_updates
   end
 
   resources :sessions, only: [:new, :create, :destroy]
@@ -25,13 +20,6 @@ LegalUtility::Application.routes.draw do
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
 
-  get "static_pages/wizard"
-
-    get "static_pages/about"
-
-  get "static_pages/help"
-
-  get "static_pages/initial_capitalization"
 
   root to: 'static_pages#home'
 

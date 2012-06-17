@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  company_id: 1
+  description: MyString
+  document_type: MyString
+  string: MyString
+  aws_key: MyString
+  applicable_date: 2012-05-25 22:03:38
+
+two:
+  company_id: 1
+  description: MyString
+  document_type: MyString
+  string: MyString
+  aws_key: MyString
+  applicable_date: 2012-05-25 22:03:38

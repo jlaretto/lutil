@@ -50,6 +50,8 @@ def create_test_data
 
   RelationPersonCompany.create!(person: p, company: cmp)
 
+  arr_people = []
+
   3.times do |n|
     first_name  = Faker::Name.first_name
     last_name = Faker::Name.last_name
@@ -58,10 +60,24 @@ def create_test_data
     city = "#{Faker::Address.city}, #{Faker::Address.state_abbr} #{Faker::Address.zip_code}"
     phone = Faker::PhoneNumber.phone_number
 
+
     pp = Person.create!(first_name: first_name, last_name: last_name, email: email, street_address: street, city_state_zip: city, phone: phone )
     RelationPersonCompany.create!(person: pp, company: cmp)
 
-
+    arr_people.push(pp)
   end
+
+    capTable = CapitalizationTable.new(description: "Actual", company: cmp)
+    capTable.save!
+    capRecord =  CapitalizationRecord.new(description: "Common Stock", authorized_amount: 10000000, capitalization_table: capTable)
+    capRecord.save!
+    eqPlan = EquityPlan.new(description: "2012 Equity Incentive Plan",authorized_amount: 10000, capitalization_record: capRecord )
+    eqPlan.save!
+
+    arr_people.each do |p|
+      EquityRecord.create!(person: p, amount: 10000, equity_type: "Stock", capitalization_record: capRecord)
+    end
+    EquityRecord.create!(person: arr_people.first, amount: 1000, equity_type: "NSO Option", capitalization_record: capRecord, equity_plan: eqPlan)
+
 
 end

@@ -22,6 +22,12 @@ module ApplicationHelper
     number_to_phone(obj.phone, :area_code => true)
   end
 
+  def format_percent(num)
+    val =     "%3.2f" % (num * 100.0)
+
+    "#{val}%"
+  end
+
   def format_shares(num)
     number_with_delimiter(Integer(num))
   end
