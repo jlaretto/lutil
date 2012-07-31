@@ -1,5 +1,6 @@
 class CapitalizationTablesController < ApplicationController
   def create
+     render "show"
   end
 
   def show
@@ -7,6 +8,7 @@ class CapitalizationTablesController < ApplicationController
     @new_equity_record = EquityRecord.new
 
     @company = Company.find_by_id(params[:company_id])
+    @capTable = CapitalizationTable.find_by_id(params[:id])
     @capitalization_records = @company.capitalization_records
     @equityPlans = @company.equity_plans
 
@@ -25,6 +27,8 @@ class CapitalizationTablesController < ApplicationController
         @fully_diluted_shares += plan.authorized_amount
       end
     end
+
+    #process proformas
 
 
 

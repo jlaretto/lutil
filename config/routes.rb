@@ -1,5 +1,17 @@
 LegalUtility::Application.routes.draw do
 
+  get "capitalization_records/index"
+
+  get "capitalization_records/show"
+
+  get "capitalization_records/create"
+
+  get "equity_plans/index"
+
+  get "equity_plans/create"
+
+  get "equity_plans/show"
+
   resources :people
 
   resources :users
@@ -7,10 +19,15 @@ LegalUtility::Application.routes.draw do
   resources :after_signup_wizard
 
   resources :companies do
-    resources :capitalization_tables, only: [:show, :index]
+
+    resources :equity_records, only: [:show, :index, :create, :destroy]
+    resources :capitalization_records, only: [:show, :index, :create, :destroy]
+    resources :equity_plans, only: [:show, :index, :create, :destroy]
     resources :documents
     resources :status_updates
   end
+
+
 
   resources :sessions, only: [:new, :create, :destroy]
 

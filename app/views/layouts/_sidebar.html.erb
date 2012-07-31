@@ -4,26 +4,24 @@
       <li class="nav-header">Sidebar</li>
       <% if current_user.active_company.present? %>
 
-        <li><a href="#">Urgent Tasks</a></li>
-          <li><a href="#">People</a></li>
-        <li><%=  link_to "Capitalization", company_capitalization_tables_path(current_user.active_company)  %></li>
-
-      <li class="nav-header">Sidebar</li>
-      <li><a href="#">Request Options</a></li>
-      <li><a href="#">Model Financing</a></li>
-      <li><a href="#">Status Thread</a></li>
-      <li><a href="#">Link</a></li>
-      <li><a href="#">Link</a></li>
-      <li><a href="#">Link</a></li>
-      <li class="nav-header">Sidebar</li>
-      <li><a href="#">Link</a></li>
-      <li><a href="#">Link</a></li>
-      <li><a href="#">Link</a></li>
-      <% else %>
-          <li><a href="#">To Come</a></li>
-          <li><a href="#">To Come</a></li>
-          <li><a href="#">To Come</a></li>
-      <% end %>
+            <li><a href="#">Urgent Tasks</a></li>
+              <li><a href="#">People</a></li>
+            <li><%=  link_to "Capitalization", company_equity_records_path(current_user.active_company)  %></li>
+            <li><%=  link_to "Authorized Capital", company_capitalization_records_path(current_user.active_company)  %></li>
+            <li><%=  link_to "Equity Plans", company_equity_plans_path(current_user.active_company)  %></li>
+              <li class="nav-header">Sidebar</li>
+          <li><a href="#">Request Options</a></li>
+          <li><a href="#">Model Financing</a></li>
+          <li><a href="#">Status Thread</a></li>
+          <% end %>
+      <% if current_user.person.companies.count > 1 %>
+          <li class="nav-header">My Companies</li>
+          <% current_user.person.companies.each do |company| %>
+              <% if company != current_user.active_company %>
+                <li><%=  link_to company.name, company_path(company)  %></li>
+              <% end %>
+          <% end %>
+       <% end %>
     </ul>
   </div><!--/.well -->
 </div><!--/span-->

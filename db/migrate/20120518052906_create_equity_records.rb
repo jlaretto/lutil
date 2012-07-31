@@ -3,6 +3,8 @@ class CreateEquityRecords < ActiveRecord::Migration
     create_table :equity_records do |t|
 
       t.integer :capitalization_record_id
+      #denormalized
+      t.integer :company_id
       t.integer :person_id
 
 

@@ -1,4 +1,7 @@
 class CompaniesController < ApplicationController
+
+  before_filter { |cntr|  redirect_to root_path if !validateCompanyAccess(params[:id])}
+
   # GET /companies
   # GET /companies.json
   def index

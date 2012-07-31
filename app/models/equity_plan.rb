@@ -1,8 +1,10 @@
 class EquityPlan < ActiveRecord::Base
-  attr_accessible :description, :authorized_amount, :capitalization_record
+  attr_accessible :description, :authorized_amount, :capitalization_record, :company, :company_id
 
   belongs_to :capitalization_record
   belongs_to :person
+
+  belongs_to :company
 
   has_many :equity_records
 

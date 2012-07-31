@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120519152031) do
+ActiveRecord::Schema.define(:version => 20120526021920) do
 
   create_table "capitalization_records", :force => true do |t|
-    t.integer  "capitalization_table_id"
+    t.integer  "company_id"
     t.string   "description"
     t.float    "authorized_amount"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "capitalization_tables", :force => true do |t|
@@ -41,9 +41,21 @@ ActiveRecord::Schema.define(:version => 20120519152031) do
     t.datetime "updated_at",             :null => false
   end
 
+  create_table "documents", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "description"
+    t.string   "document_type"
+    t.string   "string"
+    t.string   "aws_key"
+    t.datetime "applicable_date"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "equity_plans", :force => true do |t|
     t.string   "description"
     t.integer  "capitalization_record_id"
+    t.integer  "company_id"
     t.float    "authorized_amount"
     t.datetime "board_approval_date"
     t.string   "stockholder_approval_date"
@@ -54,8 +66,10 @@ ActiveRecord::Schema.define(:version => 20120519152031) do
 
   create_table "equity_records", :force => true do |t|
     t.integer  "capitalization_record_id"
+    t.integer  "company_id"
     t.integer  "person_id"
     t.float    "amount"
+    t.integer  "proforma_target_amount_type", :default => 0
     t.datetime "grant_date"
     t.integer  "vesting_schedule_id"
     t.string   "equity_type"
@@ -66,8 +80,8 @@ ActiveRecord::Schema.define(:version => 20120519152031) do
     t.string   "relation_to_description"
     t.string   "certificate_number"
     t.integer  "record_number"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "people", :force => true do |t|
@@ -92,6 +106,36 @@ ActiveRecord::Schema.define(:version => 20120519152031) do
     t.string   "relation_detail"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "status_updates", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "task_lists", :force => true do |t|
+    t.string   "description"
+    t.integer  "company_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "tasks", :force => true do |t|
+    t.string   "description"
+    t.string   "type"
+    t.integer  "responsible_user_id"
+    t.string   "urgency"
+    t.string   "instructions"
+    t.string   "answer"
+    t.datetime "deadline"
+    t.datetime "last_ping"
+    t.datetime "next_ping"
+    t.integer  "task_list_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "users", :force => true do |t|

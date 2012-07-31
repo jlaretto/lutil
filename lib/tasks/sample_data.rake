@@ -16,6 +16,7 @@ end
 def create_comps
   Company.create!(name: "Nodejitsu Inc.", street_address: "1234", city_state_zip: "New York", phone: "2124452323")
   Company.create!(name: "Cubby Inc.", street_address: "1234", city_state_zip: "New York", phone: "2124452323")
+  Company.create!(name: "TestCo Inc.", street_address: "1234", city_state_zip: "New York", phone: "2124452323")
 
 end
 
@@ -39,6 +40,8 @@ end
 def create_test_data
 
   cmp =  Company.create!(name: "NewCo Inc.", street_address: "1234", city_state_zip: "New York", phone: "2124452323")
+  cmp2 =  Company.create!(name: "NewCo 1 Inc.", street_address: "1234", city_state_zip: "New York", phone: "2124452323")
+  cmp3 =  Company.create!(name: "NewCo 2 Inc.", street_address: "1234", city_state_zip: "New York", phone: "2124452323")
 
   usr = User.create!( email: "jeff@laretto.net", password: "test", password_confirmation: "test")
 
@@ -49,6 +52,8 @@ def create_test_data
   usr.save!
 
   RelationPersonCompany.create!(person: p, company: cmp)
+  RelationPersonCompany.create!(person: p, company: cmp2)
+  RelationPersonCompany.create!(person: p, company: cmp3)
 
   arr_people = []
 
@@ -67,17 +72,17 @@ def create_test_data
     arr_people.push(pp)
   end
 
-    capTable = CapitalizationTable.new(description: "Actual", company: cmp)
-    capTable.save!
-    capRecord =  CapitalizationRecord.new(description: "Common Stock", authorized_amount: 10000000, capitalization_table: capTable)
+#    capTable = CapitalizationTable.new(description: "Actual", company: cmp)
+#    capTable.save!
+    capRecord =  CapitalizationRecord.new(description: "Common Stock", authorized_amount: 10000000, company: cmp)
     capRecord.save!
-    eqPlan = EquityPlan.new(description: "2012 Equity Incentive Plan",authorized_amount: 10000, capitalization_record: capRecord )
+    eqPlan = EquityPlan.new(description: "2012 Equity Incentive Plan",authorized_amount: 10000, capitalization_record: capRecord, company: cmp )
     eqPlan.save!
 
     arr_people.each do |p|
-      EquityRecord.create!(person: p, amount: 10000, equity_type: "Stock", capitalization_record: capRecord)
+      EquityRecord.create!(person: p, amount: 10000, equity_type: "Stock", capitalization_record: capRecord, company: cmp)
     end
-    EquityRecord.create!(person: arr_people.first, amount: 1000, equity_type: "NSO Option", capitalization_record: capRecord, equity_plan: eqPlan)
+    EquityRecord.create!(person: arr_people.first, amount: 1000, equity_type: "NSO Option", capitalization_record: capRecord, equity_plan: eqPlan, company: cmp)
 
 
 end

@@ -28,24 +28,24 @@
   </thead>
   <tbody>
   <% @capitalization_records.each do |capRecord| %>
-  <tr>
-    <td colspan="6"><%=  capRecord.description %></td>
-  </tr>
-      <% capRecord.equity_records.each do |equityRecord| %>
-      <% if equityRecord.equity_plan.nil? %>
-          <tr>
-        <td>&nbsp;&nbsp;&nbsp;<%= equityRecord.person.formatted_name %> </td>
-        <td>&nbsp;</td>
-        <td><%=  equityRecord.equity_type %></td>
-        <td><%= format_shares(equityRecord.amount) %></td>
-        <td><%= format_percent(equityRecord.amount/@outstanding_shares) %></td>
-        <td><%= format_percent(equityRecord.amount/@fully_diluted_shares) %></td>
-            <% if @proforma %>
-                <td> TODO </td>
-                <td><%=  link_to 'Destroy', company_capitalization_table_equity_record_path(@company, @capTable, equityRecord), confirm: 'Are you sure?', method: :delete %> </td>
-            <% end %>
+      <tr>
+        <td colspan="6"><%=  capRecord.description %></td>
       </tr>
-      <% end %>
+      <% capRecord.equity_records.each do |equityRecord| %>
+          <% if equityRecord.equity_plan.nil? %>
+              <tr>
+                <td>&nbsp;&nbsp;&nbsp;<%= equityRecord.person.formatted_name %> </td>
+                <td>&nbsp;</td>
+                <td><%=  equityRecord.equity_type %></td>
+                <td><%= format_shares(equityRecord.amount) %></td>
+                <td><%= format_percent(equityRecord.amount/@outstanding_shares) %></td>
+                <td><%= format_percent(equityRecord.amount/@fully_diluted_shares) %></td>
+                <% if @proforma %>
+                    <td> TODO </td>
+                    <td><%=  link_to 'Destroy', company_equity_record_path(@company, equityRecord), confirm: 'Are you sure?', method: :delete %> </td>
+                <% end %>
+              </tr>
+          <% end %>
       <% end %>
   <% end %>
 
@@ -109,8 +109,8 @@
 <div class="row">
 
   <div class="span6 offset3">
-    <%= form_for([@company, @capTable, @new_equity_record], :url => url_for(:controller => 'capitalization_tables', :action => 'show')) do |f| %>
-    <% if @new_equity_record.errors.any? %>
+    <%= form_for([@company, @new_equity_record]) do |f| %>
+        <% if @new_equity_record.errors.any? %>
             <div id="error_explanation">
               <h2><%= pluralize(@new_equity_record.errors.count, "error") %> prohibited this record from being saved:</h2>
 
@@ -135,10 +135,11 @@
         <%= f.select(:proforma_target_amount_type,[['Number of Shares', Constants::OWNERSHIP_AMOUNT], ['Fully Diluted Percentage', Constants::OWNERSHIP_FULLYDILUTED], ['Issued and Outstanding', Constants::OWNERSHIP_ISSUED]]) %>
         <br>
         <%= f.label :person %>
-        <%= f.collection_select(:person_id, @company.people, :id, :formatted_name) %>
+        <%= f.collection_select(:person_id, @company.people.append(Person.create(first_name: "Add New Person", id: -1)), :id, :formatted_name) %>
+        <%= render partial: 'shared/person_form' %>
         <%= f.label :type %>
         <%= f.collection_select(:capitalization_record_id, @company.capitalization_records, :id, :description) %>
         <br>
         <%= f.submit "Save and Continue", class:"btn btn-primary" %>
-<% end %>
-</div>
+    <% end %>
+  </div>
