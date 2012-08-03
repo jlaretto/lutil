@@ -13,8 +13,9 @@ module CompaniesHelper
     if found && current_user.active_company_id != Integer(companyID)
       current_user.active_company_id = Integer(companyID)
       current_user.save!
-      #hack to update session
-      redirect_if_not_signed_in
+
+      #saves trigger new keys, so update session
+      updateSessionCookie
     end
 
     return found

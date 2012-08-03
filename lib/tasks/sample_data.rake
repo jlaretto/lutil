@@ -43,7 +43,14 @@ def create_test_data
   cmp2 =  Company.create!(name: "NewCo 1 Inc.", street_address: "1234", city_state_zip: "New York", phone: "2124452323")
   cmp3 =  Company.create!(name: "NewCo 2 Inc.", street_address: "1234", city_state_zip: "New York", phone: "2124452323")
 
+
+
   usr = User.create!( email: "jeff@laretto.net", password: "test", password_confirmation: "test")
+
+  StatusUpdate.create!(company: cmp, user: usr, description: "Company executed agreement to issue equity to Blah")
+  StatusUpdate.create!(company: cmp, user: usr, description: "Board Meeting")
+  StatusUpdate.create!(company: cmp, user: usr, description: "A notice of cease and desist was received by the Company")
+
 
   p = Person.create!(first_name: "Jeff", last_name: "Laretto", email: "jeff@laretto.net", street_address: "1234", city_state_zip: "New York")
 

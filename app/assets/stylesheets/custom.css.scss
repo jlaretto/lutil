@@ -88,3 +88,14 @@ td.radio
   -webkit-font-smoothing: antialiased;
 
 }
+
+
+.status_updates {
+  list-style: none;
+  margin: 10px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}

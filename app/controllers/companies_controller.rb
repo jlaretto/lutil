@@ -17,6 +17,8 @@ class CompaniesController < ApplicationController
   # GET /companies/1.json
   def show
     @company = Company.find(params[:id])
+    @status_updates = @company.status_updates
+
 
     respond_to do |format|
       format.html # show.html.erb

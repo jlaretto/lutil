@@ -42,11 +42,14 @@ module SessionsHelper
       session[:forwardURL] = request.fullpath
       redirect_to signin_path
     else
-      cookies["session_token"] = {value: current_user.session_token, expires: Time.now + 3600 }
+      updateSessionCookie
     end
 
 #     redirect_to signin_path unless !current_user.nil?
+  end
 
+  def updateSessionCookie
+    cookies["session_token"] = {value: current_user.session_token, expires: Time.now + 3600 }
   end
 
 end
