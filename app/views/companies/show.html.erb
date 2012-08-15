@@ -1,54 +1,13 @@
-<div class="row">
-  <aside class="span4">
-    <section>
-      <p id="notice"><%= notice %></p>
+<div class="center-hero-unit">
+  <div class="row-fluid">
+    <div class="span7 bdr">
+      <%= render partial: 'company_detail', locals: {company: @company}  %>
+    </div>
 
-      <p>
-        <b>Name:</b>
-        <%= @company.name %>
-      </p>
+    <div class="span5 bdr">
+      <%= render 'company_status_updates' %>
+      </div>
+    </div>
 
-      <p>
-        <b>Street address:</b>
-        <%= @company.street_address %>
-      </p>
-
-      <p>
-        <b>City state zip:</b>
-        <%= @company.city_state_zip %>
-      </p>
-
-      <p>
-        <b>State of incorporation:</b>
-        <%= @company.state_of_incorporation %>
-      </p>
-
-      <p>
-        <b>Phone:</b>
-        <%= @company.phone %>
-      </p>
-
-      <p>
-        <b>Fax:</b>
-        <%= @company.fax %>
-      </p>
-      <p>
-        <b>Business description:</b>
-        <%= @company.business_description %>
-      </p>
-      <%= link_to 'Edit', edit_company_path(@company) %> |
-      <%= link_to 'Back', companies_path %>
-    </section>
-  </aside>
-  <div class="span8">
-    <% if @company.status_updates.any? %>
-        <h3>Status Updates (<%= @company.status_updates.count %>)</h3>
-        <ol class="status_updates">
-          <%= render @status_updates %>
-        </ol>
-    <% else %>
-     <h3>No Updates Yet</h3>
-    <% end %>
   </div>
-
-</div>
+</div>​
