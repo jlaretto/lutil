@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for([company, document]) do |d| %>
+        <% if document.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(document.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+              <ul>
+                <% document.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+
+        <%= d.label :name %>
+        <%= d.text_field :description %>
+        <%= d.file_field :aws_key %>
+        <%= d.date_select :applicable_date %>
+        <%= d.submit %>
+    <% end %>
+  </div>
+</div>
