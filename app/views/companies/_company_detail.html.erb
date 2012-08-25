@@ -2,7 +2,8 @@
   <div class="span12 shadow">
 <h2><%= company.name %></h2>
 <div style="margin-left: 15px">
-  <i class="icon-file"></i><a href="">Certificate of Incorporation</a>
+  <%= resolve_document_link(company, "Certificate of Incorporation", Constants::DOCUMENTTYPE_CHARTER) %>
+
   <i class="icon-file"></i><a href="">Bylaws</a>
   <br><br>
   <div class="row-fluid">

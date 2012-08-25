@@ -11,10 +11,36 @@ class Company < ActiveRecord::Base
 
   has_many :status_updates
 
+  has_many :documents
+
   #uniq collapses redundant records created by multiple relationships
   has_many :people, through: :relation_person_companies, uniq: true
 
   has_many :capitalization_records
   has_many :equity_records
   has_many :equity_plans
+
+  def retrieve_document( docType)
+      #documents.where("document_type = #{docType}")
+      docs = documents.where(document_type: docType)
+      return nil if docs.length == 0
+  end
+
+  def Charter
+    retrieve_document (Constants::DOCUMENTTYPE_CHARTER)
+  end
+
+  def Bylaws
+
+  end
+
+  def Directors
+
+  end
+
+  def Officers
+
+  end
+
+
 end

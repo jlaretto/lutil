@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
-
   before_filter { |cntr|  redirect_to root_path if !validateCompanyAccess(params[:id])}
+  helper_method :resolve_document_link
 
   # GET /companies
   # GET /companies.json
@@ -85,4 +85,18 @@ class CompaniesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def resolve_document_link(company, displayText, documentType)
+    document = company.retrieve_document(documentType)
+    classAttr = ""
+    if document.nil?
+      displayText = "#{displayText} (missing)" if document.nil?
+      url = new_company_document_path(company, document, docType: documentType)
+      classAttr = "missing"
+    else
+      url = company_document_path(company, document)
+    end
+    "<i class='icon-file'></i><a href='#{url}' class='#{classAttr}'>#{displayText}</a>".html_safe
+  end
+
 end

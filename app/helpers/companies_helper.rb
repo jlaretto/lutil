@@ -1,6 +1,9 @@
 module CompaniesHelper
 
   def validateCompanyAccess(companyID)
+    if current_user.nil?
+      return false
+    end
 
     arrCompanies = current_user.person.companies
     found = false

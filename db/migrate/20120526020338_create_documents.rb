@@ -4,7 +4,7 @@ class CreateDocuments < ActiveRecord::Migration
       t.integer :company_id
       t.string :description
       t.string :document_type
-      t.string :string
+      t.string :name
       t.string :aws_key
       t.datetime :applicable_date
 

@@ -4,4 +4,13 @@ module Constants
   OWNERSHIP_AMOUNT = 1
   OWNERSHIP_ISSUED = 2
   OWNERSHIP_FULLYDILUTED = 3
+
+  DOCUMENTTYPE_CHARTER = "Org - COI"
+  DOCUMENTTYPE_BYLAWS = "Bylaws"
+
+  DOCUMENTTYPE_VOTING = "Preferred Stock - Voting"
+  DOCUMENTTYPE_RIGHTS = "Preferred Stock - IRA"
+    DOCUMENTTYPE_ROFR = "Preferred Stock - ROFR"
+  DOCUMENTTYPE_SPA = "Preferred Stock - SPA"
+
 end
