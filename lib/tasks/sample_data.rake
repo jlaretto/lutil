@@ -5,6 +5,7 @@ namespace :db do
     create_comps
     create_persons
     create_test_data
+    create_document_tags
     #create_relations
   end
 end
@@ -92,4 +93,12 @@ def create_test_data
     EquityRecord.create!(person: arr_people.first, amount: 1000, equity_type: "NSO Option", capitalization_record: capRecord, equity_plan: eqPlan, company: cmp)
 
 
+end
+
+def create_document_tags
+    DocumentTagType.create!(name: "Board Consent", description: "Official Board Action", type: Constants::TAGTYPE_DOCUMENTTYPE )
+    DocumentTagType.create!(name: "Stockholder Consent", description: "Official Stockholder Action", type: Constants::TAGTYPE_DOCUMENTTYPE )
+    DocumentTagType.create!(name: "Board Minutes", description: "Record of a Board Meeting", type: Constants::TAGTYPE_DOCUMENTTYPE )
+    DocumentTagType.create!(name: "Stockholder 228(e) Notice", description: "Notice to Non-Consenting Stockholders", type: Constants::TAGTYPE_DOCUMENTTYPE )
+    DocumentTagType.create!(name: "Stock Purchase Agreement", description: "Transaction in Securities", type: Constants::TAGTYPE_DOCUMENTTYPE )
 end

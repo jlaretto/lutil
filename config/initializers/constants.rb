@@ -13,4 +13,7 @@ module Constants
     DOCUMENTTYPE_ROFR = "Preferred Stock - ROFR"
   DOCUMENTTYPE_SPA = "Preferred Stock - SPA"
 
+  TAGTYPE_DOCUMENTTYPE = 0
+  TAGTYPE_TERM         = 1
+  TAGTYPE_CUSTOM       = 2
 end

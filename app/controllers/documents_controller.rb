@@ -1,10 +1,17 @@
 class DocumentsController < ApplicationController
   def new
-    @document = Document.create(company_id: params[:company_id])
+    @document = Document.new
     @company = Company.find_by_id(params[:company_id])
+    @document.company = @company
   end
 
   def create
+    @document = Document.new(params[:document])
+    if @document.save
+      render "show"
+    else
+      render "new"
+    end
   end
 
   def show

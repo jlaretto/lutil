@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyString
+  mandatory_tags: MyString
+  suggested_tags: MyString
+  type: 1
+  company_id: 1
+
+two:
+  name: MyString
+  description: MyString
+  mandatory_tags: MyString
+  suggested_tags: MyString
+  type: 1
+  company_id: 1

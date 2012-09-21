@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120526021920) do
+ActiveRecord::Schema.define(:version => 20120825180921) do
 
   create_table "capitalization_records", :force => true do |t|
     t.integer  "company_id"
@@ -41,11 +41,29 @@ ActiveRecord::Schema.define(:version => 20120526021920) do
     t.datetime "updated_at",             :null => false
   end
 
+  create_table "document_tag_types", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "mandatory_tags"
+    t.string   "suggested_tags"
+    t.integer  "type"
+    t.integer  "company_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "document_tags", :force => true do |t|
+    t.integer  "document_tag_type_id"
+    t.integer  "document_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
   create_table "documents", :force => true do |t|
     t.integer  "company_id"
     t.string   "description"
     t.string   "document_type"
-    t.string   "string"
+    t.string   "name"
     t.string   "aws_key"
     t.datetime "applicable_date"
     t.datetime "created_at",      :null => false
