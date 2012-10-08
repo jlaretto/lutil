@@ -16,4 +16,7 @@
 bundler_stubs/
 
 # Ignore workspace
-.idea/*
+/.idea/*
+
+# Ignore AWS Config File (with Secret Key)
+/config/initializers/awsConfigSettings.rb

@@ -9,6 +9,7 @@ gem 'bootstrap-will_paginate', '0.0.5'
 gem 'simple_form'
 gem 'country_select'
 gem 'wicked'
+gem 'aws-sdk'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
