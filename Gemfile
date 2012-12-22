@@ -10,6 +10,10 @@ gem 'simple_form'
 gem 'country_select'
 gem 'wicked'
 gem 'aws-sdk'
+gem 'paperclip', '~> 3.0' #attachment support for the docs module
+gem 'mailman'
+gem 'jquery-ui-rails'
+gem 'foreigner' #adds foreign key support to migrations
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

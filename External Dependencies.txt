@@ -1,0 +1,13 @@
+swftools //brew install swftools
+imagemagick // brew install (necessary for paperclip functionality)
+gs // brew install gs - ghost script, for paperclip with PDFs
+
+
+Gem Paperclip: http://rdoc.info/gems/paperclip
+
+
+
+
+
+Gem Mailman (separate from rails app)
+chdzdkajdcxuhcui

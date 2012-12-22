@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  objid: MyString
+  int: MyString
+  objtype: MyString
+  string: MyString
+  obj: MyString
+  user_id: MyString
+  int: MyString
+  company_id: 
+  description: MyString
+
+two:
+  objid: MyString
+  int: MyString
+  objtype: MyString
+  string: MyString
+  obj: MyString
+  user_id: MyString
+  int: MyString
+  company_id: 
+  description: MyString

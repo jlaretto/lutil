@@ -24,6 +24,7 @@ class Company < ActiveRecord::Base
       #documents.where("document_type = #{docType}")
       docs = documents.where(document_type: docType)
       return nil if docs.length == 0
+      return docs[0]
   end
 
   def Charter

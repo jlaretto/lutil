@@ -1,6 +1,13 @@
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for([@company, @document]) do |d| %>
+
+
+    <script type="text/javascript">
+        $(function() {
+            $( "#myDateField" ).datepicker();
+        });
+    </script>
+    <%= form_for([@company, @document], html: {multipart: true}) do |documentForm| %>
         <% if @document.errors.any? %>
             <div id="error_explanation">
               <h2><%= pluralize(@document.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -13,13 +20,15 @@
             </div>
         <% end %>
 
-        <%= d.label :name %>
-        <%= d.text_field :name %>
-        <%= d.label :description %>
-        <%= d.text_field :description %>
-        <%= d.file_field :aws_key %>
-        <%= d.date_select :applicable_date %>
-        <%= d.submit "Upload Document", class: "btn btn-large btn-primary" %>
+        <%= documentForm.label :name %>
+        <%= documentForm.text_field :name %>
+        <%= documentForm.label :description %>
+        <%= documentForm.text_field :description %>
+        <%= documentForm.file_field :document %>
+        <%= documentForm.text_field :applicable_date, id: "myDateField" %>
+        <%= documentForm.label :document_type %>
+        <%= documentForm.text_field :document_type %>
+        <%= documentForm.submit "Upload Document", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
 </div>

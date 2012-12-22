@@ -40,9 +40,9 @@ end
 
 def create_test_data
 
-  cmp =  Company.create!(name: "NewCo Inc.", street_address: "1234", city_state_zip: "New York", phone: "2124452323")
-  cmp2 =  Company.create!(name: "NewCo 1 Inc.", street_address: "1234", city_state_zip: "New York", phone: "2124452323")
-  cmp3 =  Company.create!(name: "NewCo 2 Inc.", street_address: "1234", city_state_zip: "New York", phone: "2124452323")
+  cmp =  Company.create!(name: "NewCo", street_address: "1234", city_state_zip: "New York", phone: "2124452323")
+  cmp2 =  Company.create!(name: "TestCo", street_address: "1234", city_state_zip: "New York", phone: "2124452323")
+  cmp3 =  Company.create!(name: "Laretto Inc.", street_address: "1234", city_state_zip: "New York", phone: "2124452323")
 
 
 

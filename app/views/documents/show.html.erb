@@ -1,5 +1,44 @@
-<h1>Documents#show</h1>
-<p>Find me in app/views/documents/show.html.erb</p>
-<%= @document.name %>
-<%= @document.description %>
-<%= @document.aws_key %>
+<%=  render "document_summary" %>
+<link rel="stylesheet" type="text/css" href="/css/flexpaper.css" />
+<!--<script type="text/javascript" src="/js/jquery.min.js"></script>  -->
+<script type="text/javascript" src="/js/flexpaper.js"></script>
+<script type="text/javascript" src="/js/flexpaper_handlers.js"></script>
+
+
+
+  <div id="documentViewer" class="flexpaper_viewer" style="width:800px;height:1050px"></div>
+
+  <script type="text/javascript">
+
+      $('#documentViewer').FlexPaperViewer(
+              { config : {
+
+              //   SWFFile : '/<%= @document.document.path %>',
+                   SWFFile : '<%= @document.document.url %>',
+
+              Scale : 0.6,
+                  ZoomTransition : 'easeOut',
+                  ZoomTime : 0.5,
+                  ZoomInterval : 0.2,
+                  FitPageOnLoad : false,
+                  FitWidthOnLoad : true,
+                  FullScreenAsMaxWindow : false,
+                  ProgressiveLoading : false,
+                  MinZoomSize : 0.2,
+                  MaxZoomSize : 5,
+                  SearchMatchAll : false,
+                  InitViewMode : 'Portrait',
+                  RenderingOrder : 'flash,html',
+                  StartAtPage : '',
+
+                  ViewModeToolsVisible : true,
+                  ZoomToolsVisible : true,
+                  NavToolsVisible : true,
+                  CursorToolsVisible : true,
+                  SearchToolsVisible : true,
+                  WMode : 'window',
+                  localeChain: 'en_US'
+              }}
+      );
+  </script>
+

@@ -1,0 +1,33 @@
+<script type="text/javascript">
+    $(function() {
+        <%
+        i=1
+        documents.each do |document| %>
+        $( "#myDateField<%= i %>" ).datepicker();
+        <%
+            i=i+1
+        end %>
+    });
+</script>
+<table  class="table table-striped">
+  <thead>
+  <tr>
+    <th>Document Name</th>
+    <th class="radio">Date</th>
+    <th class="percent_column">Tags</th>
+    <th class="shares" >Temp</th>
+    <th class="percent_column">Temp</th>
+  </tr>
+  </thead>
+  <tbody>
+  </tbody>
+ </table>
+<% documents.each do |document| %>
+    <tr>
+      <td><%= document.name %></td>
+      <td><%= document.name %></td>
+      <td><%= document.name %></td>
+      <td><%= document.name %></td>
+      <td><%= document.name %></td>
+    </tr>
+<% end %>

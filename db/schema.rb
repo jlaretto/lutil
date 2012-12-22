@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120825180921) do
+ActiveRecord::Schema.define(:version => 20121110215540) do
 
   create_table "capitalization_records", :force => true do |t|
     t.integer  "company_id"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(:version => 20120825180921) do
     t.integer  "company_id"
     t.string   "description"
     t.boolean  "actual"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "change_logs", :force => true do |t|
+    t.integer  "objid",       :null => false
+    t.string   "objtype",     :null => false
+    t.string   "objjson",     :null => false
+    t.integer  "user_id",     :null => false
+    t.integer  "company_id"
+    t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -66,8 +77,13 @@ ActiveRecord::Schema.define(:version => 20120825180921) do
     t.string   "name"
     t.string   "aws_key"
     t.datetime "applicable_date"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.integer  "document_file_size"
+    t.datetime "document_updated_at"
+    t.boolean  "import_requires_processing", :default => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
   end
 
   create_table "equity_plans", :force => true do |t|
@@ -127,11 +143,12 @@ ActiveRecord::Schema.define(:version => 20120825180921) do
   end
 
   create_table "status_updates", :force => true do |t|
-    t.integer  "company_id"
+    t.integer  "company_id",      :null => false
     t.integer  "user_id"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "related_objects"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "task_lists", :force => true do |t|

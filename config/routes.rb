@@ -32,7 +32,7 @@ LegalUtility::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
 
-
+  match 'flashdoc/:id' => 'static_pages#sendfile'
   match '/signup', to: 'users#new'
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete

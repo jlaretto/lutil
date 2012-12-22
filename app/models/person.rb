@@ -18,4 +18,17 @@ class Person < ActiveRecord::Base
 
     "#{first_name} #{middle}#{last_name}"
   end
+
+
+ #TODO migrate this to a module to extend all saves with object logging
+ def save_with_logging(user)
+   jsonstring = valid? ? Person.find_by_id(id).to_json : nil
+   save!   # do the original
+   ChangeLog.create(objid: id, objtype: "Person", objjson: jsonstring, user_id: user.id).save! unless jsonstring.nil?
+ end
+
+  #def self.load_from_log(strUser)
+  #  strUser
+  #end
+
 end

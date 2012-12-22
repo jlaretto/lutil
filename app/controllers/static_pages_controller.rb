@@ -17,6 +17,23 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def sendfile
+    @document = Document.find_by_id(params[:id])
+    if @document.present?
+
+      if @document.company.nil? || !validateCompanyAccess(@document.company_id)
+        redirect_to root_url
+      else
+
+        path = @document.document.path
+        index = path.rindex(File.extname(path))
+        path = path[0..index-1] + ".swf"
+        send_file(path)
+      end
+    else
+      redirect_to root_url
+    end
+  end
 
   def wizard
     if params[:step].nil?

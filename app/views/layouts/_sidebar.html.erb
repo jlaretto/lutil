@@ -1,26 +1,36 @@
 <div class="span2">
   <div class="well sidebar-nav">
     <ul class="nav nav-list">
-      <li class="nav-header">Sidebar</li>
+      <li class="nav-header">Views</li>
       <% if current_user.active_company.present? %>
 
             <li><a href="#">Urgent Tasks</a></li>
-              <li><a href="#">People</a></li>
+
+          <li><a href="<%= company_documents_path(current_user.active_company)%>">Documents <%= begin
+                                          arr = Document.documents_requiring_processing(current_user.active_company)
+                                          arr.size == 0 ? "" : "(#{arr.length})"
+              end
+          %>
+                </a></li>
+
+          <li><a href="#">People</a></li>
             <li><%=  link_to "Capitalization", company_equity_records_path(current_user.active_company)  %></li>
             <li><%=  link_to "Authorized Capital", company_capitalization_records_path(current_user.active_company)  %></li>
             <li><%=  link_to "Equity Plans", company_equity_plans_path(current_user.active_company)  %></li>
-              <li class="nav-header">Sidebar</li>
+              <li class="nav-header">Actions</li>
           <li><a href="#">Request Options</a></li>
           <li><a href="#">Model Financing</a></li>
           <li><a href="#">Status Thread</a></li>
+          <li><a href="#">Process Documents</a></li>
           <% end %>
-      <% if current_user.person.companies.count > 1 %>
+      <% if current_user.person.present? && current_user.person.companies.present? && current_user.person.companies.count > 1 %>
           <li class="nav-header">My Companies</li>
           <% current_user.person.companies.each do |company| %>
               <% if company != current_user.active_company %>
                 <li><%=  link_to company.name, company_path(company)  %></li>
               <% end %>
           <% end %>
+          <li><a href="#">All Documents to Process</a></li>
        <% end %>
     </ul>
   </div><!--/.well -->

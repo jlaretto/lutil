@@ -7,8 +7,11 @@ class CreateDocuments < ActiveRecord::Migration
       t.string :name
       t.string :aws_key
       t.datetime :applicable_date
-
+      t.attachment :document
+      t.boolean :import_requires_processing, default: 0
       t.timestamps
     end
+
+
   end
 end

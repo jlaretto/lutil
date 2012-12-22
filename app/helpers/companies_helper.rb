@@ -1,7 +1,7 @@
 module CompaniesHelper
 
   def validateCompanyAccess(companyID)
-    if current_user.nil?
+    if current_user.nil? || current_user.person.nil? || current_user.person.companies.nil?
       return false
     end
 
